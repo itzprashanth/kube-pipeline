@@ -14,6 +14,11 @@ podTemplate(label: 'pod-hugo-app', containers: [
                 stage('Maven Package') {
                     sh ("mvn clean package -DskipTests")
                 }
+                stage('Create Docker Image') {
+                    sh 'cat alert-shape-215614-d9123cb13c3e.json | docker login -u _json_key --password-stdin https://gcr.io'
+                    sh 'docker build -t gcr.io/alert-shape-215614/hello-docker:${BUILD_NUMBER} .'
+                    sh 'docker push gcr.io/alert-shape-215614/hello-docker:${BUILD_NUMBER}'
+                }
             }
         }        
     }
