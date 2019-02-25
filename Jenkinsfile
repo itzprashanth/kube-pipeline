@@ -24,7 +24,7 @@ podTemplate(label: 'pod-hugo-app', containers: [
                 }
                 stage ('Deploy the App ') {
                     sh 'sed -i s/hello-docker:10/hello-docker:${BUILD_NUMBER}/g test-app.yaml'
-                    sh 'kubectl apply -f test-app.yaml -n dev
+                    sh 'kubectl apply -f test-app.yaml -n dev'
                 }
             }
         }        
