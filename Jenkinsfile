@@ -19,8 +19,12 @@ podTemplate(label: 'pod-hugo-app', containers: [
                     sh 'docker push gcr.io/alert-shape-215614/hello-docker:${BUILD_NUMBER}'
                 }
                 stage ('Connect Kubernetes Cluster ') {
-		            sh 'gcloud auth activate-service-account --key-file alert-shape-215614-d9123cb13c3e.json'
+		            sh 'gcloud auth activate-service-account --key-file alert-shape-215614-dd9275aa4a50.json'
 		            sh 'gcloud container clusters get-credentials standard-cluster-1 --zone us-central1-a --project alert-shape-215614'
+                }
+                stage ('Deploy the App ') {
+                    sh 'sed -i s/hello-docker:10/hello-docker:${BUILD_NUMBER}/g test-app.yaml
+                    sh 'kubectl apply -f test-app.yaml -n dev
                 }
             }
         }        
