@@ -23,7 +23,7 @@ podTemplate(label: 'pod-hugo-app', containers: [
 		            sh 'gcloud container clusters get-credentials standard-cluster-1 --zone us-central1-a --project alert-shape-215614'
                 }
                 stage ('Deploy the App ') {
-                    sh 'sed -i s/hello-docker:10/hello-docker:${BUILD_NUMBER}/g test-app.yaml
+                    sh 'sed -i s/hello-docker:10/hello-docker:${BUILD_NUMBER}/g test-app.yaml'
                     sh 'kubectl apply -f test-app.yaml -n dev
                 }
             }
