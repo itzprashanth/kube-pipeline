@@ -1,11 +1,11 @@
 #!groovy​
-podTemplate(label: 'pod-hugo-app', containers: [
+podTemplate(label: 'techmart', containers: [
     containerTemplate(name: 'docker', image: 'itzprashanth/mydocker', ttyEnabled: true, command: 'cat',
         envVars: [containerEnvVar(key: 'DOCKER_CONFIG', value: '/tmp/'),])],
         volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')
   ]) {
 
-    node('pod-hugo-app') {
+    node('techmart') {
 
         stage('Clone Repo') {
             checkout scm
